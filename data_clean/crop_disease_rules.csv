@@ -1,0 +1,10 @@
+crop,disease,temp_min,temp_max,humidity_min,rainfall_min
+rice,rice blast,20,28,80,100
+rice,bacterial leaf blight,25,34,75,120
+rice,sheath blight,24,30,85,110
+maize,maize rust,18,25,70,80
+maize,northern leaf blight,18,27,75,90
+cotton,cotton leaf curl virus,25,35,60,60
+cotton,bacterial blight,25,32,70,80
+chickpea,fusarium wilt,20,30,60,50
+chickpea,ascochyta blight,15,25,80,70

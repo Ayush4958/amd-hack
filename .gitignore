@@ -1,0 +1,15 @@
+# Ignore raw datasets
+data_raw/
+
+# Ignore zip files
+*.zip
+
+# Python cache
+__pycache__/
+*.pyc
+
+# VS Code settings (optional)
+.vscode/
+
+# Environment files
+.env
