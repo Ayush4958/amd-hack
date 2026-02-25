@@ -1,33 +1,33 @@
-# amd-hack
-Project For AMD Hackathon
 # Agro-Climate Knowledge Graph Backbone
-AMD Hackathon Project
+## AMD Hackathon Project
 
 ---
 
-## Project Structure 
+## 📁 Project Structure
 
+```
 project-root/
 │
-├── data/
-│   ├── raw/
-│   └── cleaned/
+├── data/                     # Dataset storage
+│   ├── raw/                  # Original raw datasets
+│   └── cleaned/              # Processed datasets
 │
-├── src/
-│   ├── preprocessing/
-│   ├── ml/
-│   ├── graph/
-│   ├── api/
-│   └── utils/
+├── src/                      # Source code
+│   ├── preprocessing/        # Data cleaning & preparation scripts
+│   ├── ml/                   # Machine learning models
+│   ├── graph/                # Knowledge graph generation logic
+│   ├── api/                  # FastAPI backend services
+│   └── utils/                # Helper utilities
 │
-├── notebooks/
-├── models/
-├── outputs/
+├── notebooks/                # Jupyter notebooks for experiments
+├── models/                   # Saved trained models
+├── outputs/                  # Generated results & logs
 │
-├── requirements.txt
-├── README.md
-├── LICENSE
-└── .gitignore
+├── requirements.txt          # Python dependencies
+├── README.md                 # Project documentation
+├── LICENSE                   # License file
+└── .gitignore                # Ignored files
+```
 
 ---
 
