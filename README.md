@@ -5,6 +5,32 @@ AMD Hackathon Project
 
 ---
 
+## Project Structure 
+
+project-root/
+│
+├── data/
+│   ├── raw/
+│   └── cleaned/
+│
+├── src/
+│   ├── preprocessing/
+│   ├── ml/
+│   ├── graph/
+│   ├── api/
+│   └── utils/
+│
+├── notebooks/
+├── models/
+├── outputs/
+│
+├── requirements.txt
+├── README.md
+├── LICENSE
+└── .gitignore
+
+---
+
 ## Project Overview
 
 This project builds a structured agricultural backbone dataset for knowledge graph modeling.
