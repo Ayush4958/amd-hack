@@ -66,10 +66,12 @@ Raw datasets are excluded from this repository for size and reproducibility reas
 
 ---
 
-## 2. Install Kaggle CLI
+## Python Dependencies
+
+Install required Python packages using:
 
 ```bash
-pip install kaggle
+pip install -r requirements.txt
 ```
 
 ## 3. Set Kaggle Credentials (Environment Variables)
