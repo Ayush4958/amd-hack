@@ -19,8 +19,7 @@ project-root/
 │   ├── api/                  # FastAPI backend services
 │   └── utils/                # Helper utilities
 │
-├── notebooks/                # Jupyter notebooks for experiments
-├── models/                   # Saved trained models
+├── models/                   # Saved trained models [For Future Development Aspect]
 ├── outputs/                  # Generated results & logs
 │
 ├── requirements.txt          # Python dependencies
