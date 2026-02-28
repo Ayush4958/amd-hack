@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-inner">
+    <h1>We take care of your <span>crops & harvest</span></h1>
+    <p>
+      Agro Intelligence has blossomed into a leading platform dedicated
+      to providing innovative solutions for agricultural analysis.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="#graph" class="btn-primary">Get Started</a>
+      <a href="#about" class="btn-light">Learn More</a>
+    </div>
+  </div>
+</section>
+
+<section class="feature-cards">
+  <div class="card">
+    <img src="/static/images/card1.jpg">
+    <div class="card-title">Crop Stress Analysis</div>
+  </div>
+
+  <div class="card">
+    <img src="/static/images/card2.jpg">
+    <div class="card-title">Soil Health Monitoring</div>
+  </div>
+
+  <div class="card">
+    <img src="/static/images/card3.jpg">
+    <div class="card-title">Eco-Friendly Interventions</div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="stat"><h2>28</h2><p>States Covered</p></div>
+  <div class="stat"><h2>150+</h2><p>Crop Varieties</p></div>
+  <div class="stat"><h2>12k</h2><p>Data Points</p></div>
+  <div class="stat"><h2>95%</h2><p>Model Accuracy</p></div>
+</section>
+
+<section id="graph" class="graph-section">
+  <h2>Knowledge Graph</h2>
+  <div class="graph-container">
+    <iframe src="/static/agro_knowledge_graph.html"></iframe>
+  </div>
+</section>
+
+<div class="legend-container">
+  <div class="legend">
+    <div><span class="dot crop"></span> Crop Nodes</div>
+    <div><span class="dot stress"></span> Stress Factors</div>
+    <div><span class="dot disease"></span> Disease Risk</div>
+    <div><span class="dot climate"></span> Climate Data</div>
+    <div><span class="dot nutrient"></span> Nutrient Info</div>
+  </div>
+</div>
+
+<section class="ask-section">
+   <div class="ask-container">
+ 
+     <h2>Ask the System</h2>
+ 
+     <form id="ask-form" method="post" action="/ask" class="ask-form">
+ 
+       <!-- Toggle -->
+       <div class="mode-toggle">
+         <label class="toggle-option">
+           <input type="radio" name="mode" value="farmer" checked>
+           <span>Farmer Mode</span>
+         </label>
+ 
+         <label class="toggle-option">
+           <input type="radio" name="mode" value="research">
+           <span>Research Mode</span>
+         </label>
+       </div>
+ 
+       <!-- Input -->
+       <div class="input-wrapper">
+         <input
+           type="text"
+           name="question"
+           placeholder="Ask about crop stress, climate risk, or a specific state..."
+           required
+         >
+         <button type="submit">Ask</button>
+       </div>
+ 
+     </form>
+ 
+   </div>
+ </section>
+
+  <div class="answer-card" id="answer-section" style="display:none; margin-top:18px;">
+    <h3>System Insight</h3>
+    <pre id="answer-text" style="white-space:pre-wrap; margin:0;"></pre>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById("ask-form");
+  const answerSection = document.getElementById("answer-section");
+  const answerText = document.getElementById("answer-text");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const res = await fetch("/ask", {
+      method: "POST",
+      body: new FormData(form)
+    });
+
+    const text = await res.text();
+    answerText.textContent = text;
+    answerSection.style.display = "block";
+    answerSection.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  });
+</script>
+
+<footer class="site-footer">
+   <div class="footer-container">
+       <div class="footer-left">
+           <h4>Agro Intelligence</h4>
+           <p>Data-driven agricultural insights for resilient farming.</p>
+       </div>
+
+       <div class="footer-right">
+           <p>© 2026 Agro Intelligence</p>
+       </div>
+   </div>
+</footer>
+
+{% endblock %}
+

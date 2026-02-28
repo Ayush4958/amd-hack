@@ -1,3 +1,9 @@
-kaggle
+fastapi
+uvicorn
+jinja2
+python-multipart
 pandas
 numpy
+networkx
+pyvis
+kaggle

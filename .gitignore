@@ -1,15 +1,33 @@
-# Ignore raw datasets
-data_raw/
+# Raw datasets
+data/data_raw/
 
-# Ignore zip files
-*.zip
+# INTERMEDIATE PIPELINE OUTPUTS
+data/cleaned/final_state_crop_dataset.csv
+data/cleaned/final_state_crop_with_climate.csv
+data/cleaned/nasa_power_annual_climate.csv
+data/cleaned/nasa_power_climate.csv
+
+# Generated files
+outputs/
+lib/
+/static/agro_knowledge_graph.html
 
 # Python cache
 __pycache__/
 *.pyc
+*.pyo
 
-# VS Code settings (optional)
+# Virtual environments
+.venv/
+venv/
+env/
+
+# VS Code
 .vscode/
 
-# Environment files
+# Environment variables
 .env
+
+# OS junk
+.DS_Store
+Thumbs.db

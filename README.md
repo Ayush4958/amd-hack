@@ -8,48 +8,63 @@
 ```
 project-root/
 │
-├── data/                     # Dataset storage
-│   ├── raw/                  # Original raw datasets
-│   └── cleaned/              # Processed datasets
+├── data/
+│   └── cleaned/
+│       └── final_enriched_dataset.csv
 │
-├── src/                      # Source code
-│   ├── preprocessing/        # Data cleaning & preparation scripts
-│   ├── ml/                   # Machine learning models
-│   ├── graph/                # Knowledge graph generation logic
-│   ├── api/                  # FastAPI backend services
-│   └── utils/                # Helper utilities
+├── src/
+│   ├── processing/
+│   ├── data_fetch/
+│   ├── data_processing/
+│   ├── features/
+│   ├── graph/
+│   ├── runner/
+│   └── web/
 │
-├── models/                   # Saved trained models [For Future Development Aspect]
-├── outputs/                  # Generated results & logs
+├── static/
+│   ├── css/
+│   ├── images/
+│   └── agro_knowledge_graph.html
 │
-├── requirements.txt          # Python dependencies
-├── README.md                 # Project documentation
-├── LICENSE                   # License file
-└── .gitignore                # Ignored files
+├── requirements.txt
+├── README.md
+└── .gitignore
 ```
 
 ---
 
+
+
 ## Project Overview
 
-This project builds a structured agricultural backbone dataset for knowledge graph modeling.
+This project builds a structured agro-intelligence backbone for state-level crop risk analysis and knowledge graph modeling.
 
-The system integrates:
+The system integrates multiple agricultural dimensions into a unified analytical dataset:
 
-- State-level crop yield (1966–2017)
-- Climate variables (rainfall, temperature, humidity)
-- Nutrient requirements (N, P, K)
-- Soil nutrient levels (N, P, K, pH)
-- Structured disease trigger rules
+* Historical crop yield data (1966–2017)
+* Climate indicators (rainfall, temperature, humidity, variability, anomalies)
+* Soil nutrient context (N, P, K, pH)
+* Nutrient requirement benchmarks (N, P, K)
+* Custom rule-based disease trigger thresholds
 
-The output dataset is graph-ready and enables:
+These components are engineered into a consolidated enriched dataset that computes:
 
-- Crop–climate–yield relationship modeling
-- Disease risk inference
-- Nutrient stress reasoning
-- State-level agricultural analytics
+* Climate stress index
+* Nutrient stress index
+* Disease risk score
+* Agro stress index
+* Resilience score
+* Confidence score for low-yield signaling
 
----
+The final dataset is graph-ready and enables:
+
+* Crop–climate–yield relationship modeling
+* Disease risk inference under environmental conditions
+* Nutrient stress diagnostics
+* State-level agricultural system analysis
+* Knowledge graph visualization of agro relationships
+
+
 
 ## Crops Covered
 
@@ -62,169 +77,116 @@ The output dataset is graph-ready and enables:
 
 ## Dataset Sources
 
-This project uses the following Kaggle datasets:
+The agricultural backbone was constructed using the following data sources:
 
-1. Indian Historical Crop Yield and Weather Data  
-   - Provides yield, rainfall, temperature, humidity  
-   - Years: 1966–2017  
-   - Used as the primary backbone  
+1. **Indian Historical Crop Yield and Weather Data (Kaggle)**
 
-2. Crop Yield Data with Soil and Weather Dataset  
-   - Provides state-level soil NPK and pH  
-   - Used to enrich backbone with soil features  
+   * State-level crop yield, rainfall, temperature, humidity
+   * Years: 1966–2017
+   * Used as the primary historical yield backbone
 
-Raw datasets are excluded from this repository for size and reproducibility reasons.
+2. **Crop Yield Data with Soil and Weather Dataset (Kaggle)**
+
+   * Soil nutrient values (N, P, K) and pH
+   * Used to enrich crop context with soil features
+
+3. **NASA POWER Climate Database**
+
+   * Long-term climate indicators
+   * Used to compute climate anomalies, volatility, and stress metrics
+
+4. **Custom Rule-Based Disease Dataset (Manually Engineered)**
+
+   * Structured disease trigger thresholds based on crop–climate relationships
+   * Includes temperature range, humidity threshold, and rainfall threshold
+   * Designed and encoded within this project
+   * Exported as `data/cleaned/crop_disease_rules.csv`
+
+All sources were processed and merged through the project’s pipeline to generate:
+
+```
+data/cleaned/final_enriched_dataset.csv
+```
+
+The enriched dataset is included in this repository.
+
+No Kaggle API setup or external download is required to run the application.
+
+External access is only required if rebuilding the full dataset from raw sources.
+
 
 ---
 
-# Data Setup (Kaggle API Required)
 
-## 1. Create a Kaggle Account
+# How To Run (Step-by-Step)
 
-1. Go to https://www.kaggle.com  
-2. Open **Account Settings**  
-3. Under **API**, click **Create New API Token**  
-4. Open the downloaded `kaggle.json` file  
-5. Copy the values of:
-   - `username`
-   - `key`
 
----
-
-## Python Dependencies
-
-Install required Python packages using:
+## Step 1 — Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## 3. Set Kaggle Credentials (Environment Variables)
-
-### Windows (PowerShell)
-
-
-```powershell
-setx KAGGLE_USERNAME "your_username"
-setx KAGGLE_KEY "your_api_key"
-````
-
-After running the above commands, restart your terminal.
+Recommended Python: 3.10+
 
 ---
 
-### macOS / Linux
+## Step 2 — Generate Knowledge Graph
+
+Run:
 
 ```bash
-export KAGGLE_USERNAME="your_username"
-export KAGGLE_KEY="your_api_key"
+python src/graph/knowledge_graph.py
 ```
+
+This generates:
+
+```
+static/agro_knowledge_graph.html
+```
+
+This step ensures the graph loads properly inside the web interface.
 
 ---
 
-### 4. Create Raw Data Directory
+## Step 3 — (Optional) Rebuild Dataset From Pipeline
 
-From the project root:
+Only needed if you want to regenerate the enriched dataset.
+
+Run in order:
 
 ```bash
-mkdir data_raw
+python src/processing/clean.py
+python src/data_fetch/nasa_power_climate.py
+python src/data_processing/merge_climate.py
+python src/features/feature_engineering.py
 ```
+
+This recreates:
+
+```
+data/cleaned/final_enriched_dataset.csv
+```
+
+For normal usage, this step is not required.
 
 ---
 
-### 5. Download Required Datasets
-
-Run the following commands inside PowerShell (Windows) or terminal (macOS/Linux):
+## Step 4 — Start the Web Application
 
 ```bash
-kaggle datasets download -d zoya77/indian-historical-crop-yield-and-weather-data -p data_raw
-
-kaggle datasets download -d anshumish/crop-yield-data-with-soil-and-weather-dataset -p data_raw
+uvicorn src.web.app:app --reload
 ```
+
+Open in browser:
+
+```
+http://127.0.0.1:8000
+```
+
+The application and knowledge graph will load.
 
 ---
 
-### 6. Extract the Downloaded ZIP Files
+## Project Structure
 
-#### Windows (PowerShell)
-
-```powershell
-cd data_raw
-Expand-Archive *.zip
-```
-
-#### macOS / Linux
-
-```bash
-cd data_raw
-unzip "*.zip"
-```
-
----
-
-### 7. Run the Data Cleaning Pipeline
-
-Return to the project root and execute:
-
-```bash
-python clean.py
-```
-
----
-
-## Output Files
-
-After successful execution, the following files will be generated:
-
-```
-data_clean/
-│
-├── final_state_crop_dataset.csv
-└── crop_disease_rules.csv
-```
-
----
-
-### final_state_crop_dataset.csv
-
-Contains:
-
-* state
-* crop
-* year (1966–2017)
-* yield
-* rainfall
-* temperature
-* humidity
-* n_req_kg_per_ha
-* p_req_kg_per_ha
-* k_req_kg_per_ha
-* soil_n
-* soil_p
-* soil_k
-* soil_ph
-
-Cleaned dataset includes:
-
-* 19 states
-* 4 crops
-* No null values
-* No duplicates
-
----
-
-### crop_disease_rules.csv
-
-Contains structured disease trigger rules:
-
-* crop
-* disease
-* temp_min
-* temp_max
-* humidity_min
-* rainfall_min
-
-This dataset enables rule-based disease risk inference within the knowledge graph.
-
-```
-```

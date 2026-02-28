@@ -2,7 +2,7 @@ import pandas as pd
 import os
 
 # ==========================================================
-# 1️⃣ BUILD STATE-LEVEL BACKBONE (HISTORICAL DATASET)
+# 1️ BUILD STATE-LEVEL BACKBONE (HISTORICAL DATASET)
 # ==========================================================
 
 hist_path = "data/data_raw/indian-historical-crop-yield-and-weather-data/Custom_Crops_yield_Historical_Dataset.csv"
@@ -61,7 +61,7 @@ print(state_df.isnull().sum())
 
 
 # ==========================================================
-# 2️⃣ CLEAN SOIL DATASET
+# 2️ CLEAN SOIL DATASET
 # ==========================================================
 
 soil_path = "data/data_raw/crop-yield-data-with-soil-and-weather-dataset/state_soil_data.csv"
@@ -86,7 +86,7 @@ print("Extra in soil:", set(soil_df['state']) - set(state_df['state']))
 
 
 # ==========================================================
-# 3️⃣ MERGE SOIL INTO STATE DATA
+# 3️ MERGE SOIL INTO STATE DATA
 # ==========================================================
 
 state_df = state_df.merge(soil_df, on='state', how='left')
@@ -103,7 +103,7 @@ print("\nStates After Soil Merge:", state_df['state'].nunique())
 
 
 # ==========================================================
-# 4️⃣ DROP PRE-1981 YEARS (Climate alignment)
+# 4️ DROP PRE-1981 YEARS (Climate alignment)
 # ==========================================================
 
 state_df = state_df[state_df['year'] >= 1981]
@@ -113,7 +113,7 @@ print("Year Range:", state_df['year'].min(), "-", state_df['year'].max())
 
 
 # ==========================================================
-# 5️⃣ CREATE STRUCTURED DISEASE RULE DATASET
+# 5️ CREATE STRUCTURED DISEASE RULE DATASET
 # ==========================================================
 
 disease_rules = [
