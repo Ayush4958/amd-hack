@@ -188,5 +188,13 @@ The application and knowledge graph will load.
 
 ---
 
-## Project Structure
+## Application Preview
+### Home Interface
+![alt text](image.png)
+![alt text](image-1.png)
 
+### Knowledge Graph
+
+![alt text](image-2.png)
+
+![alt text](image-3.png)
