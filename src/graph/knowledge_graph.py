@@ -88,21 +88,23 @@ def visualize_graph(G):
     font_color="white"
 )
     net.set_options("""
-    var options = {
-    layout: {
-        hierarchical: {
-        enabled: true,
-        levelSeparation: 180,
-        nodeSpacing: 150,
-        treeSpacing: 200,
-        direction: "LR",
-        sortMethod: "directed"
+    {
+    "layout": {
+        "hierarchical": {
+        "enabled": true,
+        "levelSeparation": 180,
+        "nodeSpacing": 150,
+        "treeSpacing": 200,
+        "direction": "LR",
+        "sortMethod": "directed"
         }
     },
-    physics: false,
-    interaction: {
-        dragView: true,
-        zoomView: true
+    "physics": {
+        "enabled": false
+    },
+    "interaction": {
+        "dragView": true,
+        "zoomView": true
     }
     }
     """)
